@@ -30,6 +30,7 @@ export const loadCart=()=>{
     }else   
     {
       localStorage.setItem("cart",JSON.stringify([]));
+      return JSON.parse(localStorage.getItem("cart"));
     }
 }};
 
