@@ -18,7 +18,7 @@ const Cart = () => {
     return (
       <div>
         <h2>Cart Products</h2>
-        {products.map((product, index) => (
+        {products.length>0 && products.map((product, index) => (
           <Card
             key={index}
             product={product}
@@ -28,6 +28,7 @@ const Cart = () => {
             reload={reload}
           />
         ))}
+        {products.length===0 && <div className="text-white">Cart is Empty</div>}
       </div>
     );
   };
