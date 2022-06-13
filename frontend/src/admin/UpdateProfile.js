@@ -39,7 +39,13 @@ const UpdateProfile = ({match}) => {
     
       const onSubmit = event => {
         event.preventDefault();
-        updateProfile({ name, email },user._id,token)
+        
+        let to_send={
+          name:name,
+          email:email
+        }
+  
+        updateProfile( to_send,user._id,token)
           .then(data => {
             if (data.error) {
               setValues({ ...values, error: data.error, success: false });
@@ -84,19 +90,19 @@ const UpdateProfile = ({match}) => {
                   />
                 </div>
     
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label className="text-light">Password</label>
                   <input
                     onChange={handleChange("password")}
                     className="form-control"
                     type="password"
                     value={password}
+                    placeholder="Enter your new password here"
                   />
-                </div>
+                </div> */}
                 <button onClick={onSubmit} className="btn btn-success btn-block " center>
                   Submit
-                </button>
-                <div>{JSON.stringify(values)}</div> 
+                </button> 
               </form>
             </div>
           </div>

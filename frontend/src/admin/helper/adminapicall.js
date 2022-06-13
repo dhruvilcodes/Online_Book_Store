@@ -108,15 +108,17 @@ export const updateProduct=(productId,userId,token,product)=>{
 
 
 export const updateProfile=(user,userId,token)=>{
+
   return fetch(`${API}/user/${userId}`,{
     method: "PUT",
     headers:
     {
       Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
 
     },
-    body:user
+    body:JSON.stringify(user)
   }).then(response=>{
     return response.json()
   }).catch(error=>{
@@ -132,6 +134,7 @@ export const getUser=(userId,token)=>{
     headers:
     {
       Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
 
     }

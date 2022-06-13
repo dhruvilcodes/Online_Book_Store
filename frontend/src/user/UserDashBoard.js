@@ -1,10 +1,23 @@
-import React from 'react'
+import React,{ useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base';
+import { getUser } from "../admin/helper/adminapicall";
 
 const UserDashBoard =()=> {
-  const {user:{name,email,role}}=isAuthenticated();
+  const {user,token}=isAuthenticated();
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+  const check=()=>{
+      getUser(user._id,token).then((data)=>{
+
+           setName(data.name);
+           setEmail(data.email)
+      }).catch(e=>console.log(e));
+  } 
+  useEffect(() => {
+    check();
+}, []);
   const adminLeftSide=()=>{
     return(
       <div className='card'>
@@ -13,9 +26,9 @@ const UserDashBoard =()=> {
          <li className="list-group-item">
            <Link to="/user/profile" className='nav-link text-success'>Manage Profie</Link>
           </li>
-         <li className="list-group-item">
+         {/* <li className="list-group-item">
            <Link to="/admin/orders" className='nav-link text-success'>Manage Orders</Link>
-         </li>
+         </li> */}
        </ul>
       </div>
     )
@@ -45,8 +58,8 @@ const UserDashBoard =()=> {
   return (
     <Base title='Welcome to User Area' description='Manage your profile here' className='container bg-success p-4'>
     <div className='row'>
-    {/* <div>{adminLeftSide()} </div> */}
-        <div > {adminRightSide()} </div>
+    <div className='col-3'>{adminLeftSide()} </div>
+        <div className='col-9'> {adminRightSide()} </div>
     </div>
   </Base>
 )
