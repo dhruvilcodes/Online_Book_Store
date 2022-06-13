@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +27,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
     "npm": "^6.13.0",
+    "path": "^0.12.7",
     "uuid": "^3.3.3"
   }
 }
