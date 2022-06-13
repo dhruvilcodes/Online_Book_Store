@@ -28,7 +28,7 @@ const Cart = () => {
             reload={reload}
           />
         ))}
-        
+        {products.length===0 && <div className="text-white">Cart is Empty</div>}
       </div>
     );
   };
@@ -44,7 +44,6 @@ const Cart = () => {
     <Base title="Cart Page" description="Ready to checkout">
       <div className="row text-center">
         <div className="col-6">{loadAllProducts()}</div>
-        <div className="col-6">{products.length===0 && "Cart is Empty"}</div>
         <div className="col-6">
           <StripeCheckout products={products} setReload={setReload} />
         </div>
