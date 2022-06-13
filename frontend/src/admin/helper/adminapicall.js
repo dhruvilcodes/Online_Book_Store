@@ -106,3 +106,37 @@ export const updateProduct=(productId,userId,token,product)=>{
   })
 }
 
+
+export const updateProfile=(user,userId,token)=>{
+  return fetch(`${API}/user/${userId}`,{
+    method: "PUT",
+    headers:
+    {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+
+    },
+    body:user
+  }).then(response=>{
+    return response.json()
+  }).catch(error=>{
+     return (error);
+  })
+}
+
+
+
+export const getUser=(userId,token)=>{
+  return fetch(`${API}/user/${userId}`,{
+    method:"GET",
+    headers:
+    {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+
+    }
+  }).then(response=>{
+    return response.json();
+  }).catch(err=>console.log(err))
+
+}
