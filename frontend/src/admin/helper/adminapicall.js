@@ -175,3 +175,17 @@ export const getAllOrders=(userId,token)=>{
     return response.json();
   }).catch(err=>console.log(err))
 }
+
+
+export const getAllUserOrders=(userId,token)=>{
+  return fetch(`${API}/order/all/${userId}`,{
+    method:"GET",
+    headers:
+    {
+      Authorization: `Bearer ${token}`
+
+    }
+  }).then(response=>{
+    return response.json();
+  }).catch(err=>console.log(err))
+}

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import Base from '../core/Base';
-import { getAllOrders } from '../admin/helper/adminapicall';
-const UserOrders = () => {
+import { getAllUserOrders } from '../admin/helper/adminapicall';
+
+const AdminOrders = () => {
     const [orders, setOrders] = useState([])
     const { user, token } = isAuthenticated()
 
 
     const preload = () => {
-        getAllOrders(user._id,token).then(data => {
+        getAllUserOrders(user._id,token).then(data => {
             if (data.error) {
                 console.log(data.error);
             } else {
@@ -31,10 +32,10 @@ const UserOrders = () => {
     }
 
     return (
-        <Base title="Welcome User" description="Manage Orders here">
+        <Base title="Welcome Admin" description="Manage Orders here">
             <h2 className="mb-4">All Orders:</h2>
-            <Link className="btn btn-info" to={`/user/dashboard`}>
-                <span className="">User Home</span>
+            <Link className="btn btn-info" to={`/admin/dashboard`}>
+                <span className="">Admin Home</span>
             </Link>
             <div className="row">
                 <div className="col-12">
@@ -48,6 +49,7 @@ const UserOrders = () => {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Order Date</th>
+                        <th scope="col">Customer Name</th>
                         <th scope="col">Total Amount</th>
                         <th scope="col"> Status</th>
                       </tr>
@@ -60,8 +62,8 @@ const UserOrders = () => {
                     return (
                         <tr>
                         <th scope="row">{index+1}</th>
-                       
                         <td>{order.createdAt}</td>
+                        <td>{order.user.name}</td>
                         <td>{getAmount(order.products)}</td>
                         <td>{order.status}</td>
                       </tr>
@@ -80,4 +82,4 @@ const UserOrders = () => {
 
 
 
-export default  UserOrders;
+export default  AdminOrders;
