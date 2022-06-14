@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper'
 import { cartEmpty, loadCart } from './helper/cartHelper'
-
-
-
+import {createOrder} from "../admin/helper/adminapicall"
 
 
 
@@ -17,6 +15,8 @@ const StripeCheckOut = ({ products, setReload, reload }) => {
         address: ""
     })
 
+    
+
 
     const token = isAuthenticated() && isAuthenticated().token;
     const userId = isAuthenticated() && isAuthenticated().user._id;
@@ -27,9 +27,35 @@ const StripeCheckOut = ({ products, setReload, reload }) => {
             return currentValue + nextValue.count * nextValue.price;
         }, 0)
     }
-    const showStripeButton = () => {
+
+    const ShowSucess=(e)=>{
+        e.preventDefault();
+        alert("Thank you for Purchasing for our site");
+
+        if(typeof window!==undefined)
+        {
+
+            let cart=(localStorage.getItem("cart"));
+            let order={
+                order:{
+                    products:JSON.parse(cart)
+                }
+            }
+            createOrder(order,userId,token).then((response)=>{
+                let new_cart=[];
+                localStorage.setItem("cart", JSON.stringify(new_cart));
+                setReload(!reload);
+            }).catch((e)=>(console.log(e)))
+            
+        }
+    }
+
+
+
+
+    const showPaymentButton = () => {
         return isAuthenticated() ? (
-            <button className='btn btn-success'>Pay with Stripe</button>
+            <button className='btn btn-success' onClick={ShowSucess}>Pay Via Payment Gateway</button>
         ) : (
             <Link to="/signin">
                 <button className="btn btn-warning">Sign In</button>
@@ -70,7 +96,7 @@ const StripeCheckOut = ({ products, setReload, reload }) => {
                 }
                 <div className='text-white'>Total amount to be paid: ₹{getFinalPrice()}</div>
                 <br />
-                {showStripeButton()}
+                {showPaymentButton()}
             </h3>
         </div>
     )

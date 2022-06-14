@@ -143,3 +143,35 @@ export const getUser=(userId,token)=>{
   }).catch(err=>console.log(err))
 
 }
+
+
+export const createOrder=(order,userId,token)=>{
+  return fetch(`${API}/order/create/${userId}`,{
+    method: "POST",
+    headers:
+    {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+
+    },
+    body:JSON.stringify(order)
+  }).then(response=>{
+    return response.json()
+  }).catch(error=>{
+    console.log(error);
+  })
+}
+
+export const getAllOrders=(userId,token)=>{
+  return fetch(`${API}/orders/user/${userId}`,{
+    method:"GET",
+    headers:
+    {
+      Authorization: `Bearer ${token}`
+
+    }
+  }).then(response=>{
+    return response.json();
+  }).catch(err=>console.log(err))
+}

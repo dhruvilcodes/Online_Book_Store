@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const Order = require("../models/order");
+const {Order} = require("../models/order");
 const { rearg } = require("lodash");
 exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -61,7 +61,6 @@ exports.userPurchaseList = (req, res) => {
 }
 
 exports.pushOrderInPurchaseList = (req, res, next) => {
-
   let purchases = []
   req.body.order.products.forEach(product => {
     purchases.push({

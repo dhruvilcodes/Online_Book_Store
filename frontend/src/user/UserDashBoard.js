@@ -26,9 +26,9 @@ const UserDashBoard =()=> {
          <li className="list-group-item">
            <Link to="/user/profile" className='nav-link text-success'>Manage Profie</Link>
           </li>
-         {/* <li className="list-group-item">
-           <Link to="/admin/orders" className='nav-link text-success'>Manage Orders</Link>
-         </li> */}
+         <li className="list-group-item">
+           <Link to="/user/orders" className='nav-link text-success'>Manage Orders</Link>
+         </li>
        </ul>
       </div>
     )
