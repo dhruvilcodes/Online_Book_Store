@@ -88,6 +88,12 @@ const AddProduct = () => {
     </div>
   )
 
+  const errorMessage=()=>(
+    <div className="alert alert-danger mt-3" style={{display:createdProduct?"none":""}}>
+      <h4> created successfully</h4>
+    </div>
+  )
+
   const createProductForm = () => (
     <form>
       <span>Post photo</span>
@@ -176,7 +182,8 @@ const AddProduct = () => {
       <div className="row bg-dark text-white rounded">
 
       
-        <div className="col-md-8 offset-md-2">  
+        <div className="col-md-8 offset-md-2"> 
+        {errorMessage()} 
         {successMessage()}
         {createProductForm()}
         </div>

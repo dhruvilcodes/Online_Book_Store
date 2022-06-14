@@ -6,7 +6,6 @@ import { isAuthenticated } from "../auth/helper/index";
 
 const UpdateProduct = ({match}) => {
   const { user, token } = isAuthenticated();
-
   const [values, setValues] = useState({
     name: "",
     description: "",
@@ -53,7 +52,7 @@ const UpdateProduct = ({match}) => {
             formData:new FormData(),
             
          });
-      
+    
       }
     });
   };
@@ -158,6 +157,7 @@ const UpdateProduct = ({match}) => {
           onChange={handleChange("category")}
           className="form-control"
           placeholder="Category"
+        
         >
           <option >Select</option>
           {categories &&
