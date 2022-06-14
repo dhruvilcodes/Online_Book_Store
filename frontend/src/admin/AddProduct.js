@@ -90,7 +90,7 @@ const AddProduct = () => {
 
   const errorMessage=()=>(
     <div className="alert alert-danger mt-3" style={{display:createdProduct?"none":""}}>
-      <h4> created successfully</h4>
+      <h4>Error in Update</h4>
     </div>
   )
 
